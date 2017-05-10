@@ -10,14 +10,12 @@ import (
 )
 
 const (
-	defaultPort string = "9000"
+	defaultPort string = "80"
 )
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	http.HandleFunc("/", profanity.Filter)
-	http.HandleFunc("/recache", profanity.Recache)
-	http.HandleFunc("/heartbeat", profanity.Heartbeat)
 	port := port(os.Args)
 	log.Println("Server started: http://localhost:" + port)
 	log.Fatal(http.ListenAndServe(":" + port, nil))
